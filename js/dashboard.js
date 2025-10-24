@@ -22,14 +22,10 @@ if (logoutBtn) {
 }
 
 // ===============================
-// KONFIGURASI GOOGLE SHEETS
+// KONFIGURASI GOOGLE SHEETS (CSV PUBLIC)
 // ===============================
-const SHEET_ID = "1oqilMchLR06dTTTLe_4hNySj4eKWxmHlqACob6aXm-g";
-const SHEET_NAME = "DATA KP ALL JATIM";
-const API_KEY = "AIzaSyCCa1sJXIaf3J0PFEfWbdxxsBzq-j45jt4";
-const ENDPOINT = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(
-  SHEET_NAME
-)}!A:AG?key=${API_KEY}`;
+// Ganti link ini dengan link sheet kamu (output=csv)
+const SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTkV55boNedcPU8QjzEw9MsHnU-MkNlBztwDtTENdwFRym-hGDXOkm8zGJvC6XzNbPKujnwH8LzIIlE/pub?output=csv";
 
 // ===============================
 // INISIALISASI PETA LEAFLET
@@ -49,19 +45,19 @@ let filteredMarkers = [];
 let controlRouting;
 
 // ===============================
-// AMBIL DATA DARI GOOGLE SHEETS
+// AMBIL DATA DARI GOOGLE SHEETS (CSV)
 // ===============================
-fetch(ENDPOINT)
-  .then((res) => res.json())
-  .then((data) => {
-    const rows = data.values;
+fetch(SHEET_CSV)
+  .then((res) => res.text())
+  .then((csv) => {
+    const rows = csv.trim().split("\n").map((r) => r.split(","));
     if (!rows || rows.length < 2) {
       document.getElementById("rtuTableBody").innerHTML =
         '<tr><td colspan="6" class="text-center">Data kosong</td></tr>';
       return;
     }
 
-    // Indeks kolom sesuai spreadsheet
+    // Indeks kolom sesuai spreadsheet (urutannya sama seperti sebelumnya)
     const IDX_UP3 = 3;
     const IDX_ULP = 4;
     const IDX_GI = 5;
@@ -138,7 +134,7 @@ fetch(ENDPOINT)
       `);
       marker._data = item;
       markers.push(marker);
-      marker.addTo(map); // tampilkan semua marker di awal
+      marker.addTo(map);
     });
 
     // Jumlah unik
@@ -262,7 +258,6 @@ function updateTable(dataList) {
       <td>${d.bat || "-"}</td>
     `;
 
-    // Klik baris tabel → zoom ke marker dan tampilkan popup
     tr.addEventListener("click", () => {
       const marker = markers.find(
         (m) =>
@@ -276,8 +271,6 @@ function updateTable(dataList) {
         tr.classList.add("table-active");
         map.flyTo(marker.getLatLng(), 15, { duration: 1.5 });
         marker.openPopup();
-      } else {
-        console.warn("Marker tidak ditemukan untuk:", d.nama);
       }
     });
 
