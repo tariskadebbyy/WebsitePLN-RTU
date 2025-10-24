@@ -1,0 +1,300 @@
+/* ========================================================= */
+/* === GLOBAL RESET & FONT === */
+/* ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* ========================================================= */
+/* === LOGIN PAGE === */
+/* ========================================================= */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #74b9ff; /* biru lebih lembut */
+  background-image: url("../assets/pln-bg.png");
+  background-repeat: repeat;
+  background-size: 650px;
+}
+
+/* === CONTAINER UTAMA LOGIN === */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* === CARD LOGIN === */
+.login-card {
+  background-color: #0a2540;
+  border-radius: 35px;
+  width: 500px;
+  max-width: 90%;
+  padding: 2rem 2rem 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* === ILUSTRASI DALAM CARD === */
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/pln-illustration.png");
+  background-repeat: no-repeat;
+  background-size: 85%;
+  background-position: center 30px;
+  opacity: 0.25; /* dikurangi agar teks lebih jelas */
+  z-index: 0;
+}
+
+.login-card h2,
+.login-card form {
+  position: relative;
+  z-index: 1;
+}
+
+/* === JUDUL === */
+.login-card h2 {
+  margin: 0 0 10rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.lightning {
+  color: #ffcc00;
+}
+
+/* === FORM LOGIN === */
+.login-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 25px;
+}
+
+.form-group {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+}
+
+/* === PASSWORD TOGGLE === */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #0a2540;
+  font-size: 1rem;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* === BUTTON LOGIN === */
+.login-btn {
+  margin-top: 20px;
+  width: 200px;
+  padding: 14px;
+  background: #547cc6;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.login-btn:hover {
+  background: #2c5eb8;
+  transform: translateY(-2px);
+}
+
+/* === NOTIFIKASI === */
+.notif {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+}
+
+.notif.error { color: #ff4d4d; }
+.notif.success { color: #00cc66; }
+
+/* === RESPONSIVE LOGIN === */
+@media (max-width: 480px) {
+  .login-card {
+    width: 90%;
+    padding: 1.5rem;
+  }
+  .login-card h2 {
+    margin-bottom: 6rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* ========================================================= */
+/* === DASHBOARD PAGE === */
+/* ========================================================= */
+.dashboard-page {
+  background: #e5e9f0;
+  font-family: Arial, sans-serif;
+}
+
+/* === SIDEBAR === */
+#sidebar {
+  width: 250px;
+  background: #0b2c54;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px 15px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+}
+
+#sidebar h4 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+}
+
+#sidebar a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  text-decoration: none;
+  border-radius: 6px;
+  margin: 6px 5px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+#sidebar a.active,
+#sidebar a:hover {
+  background: #1e6091;
+}
+
+/* === CONTENT AREA === */
+#content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+#content h3 {
+  background: #1e6091;
+  color: #fff;
+  padding: 18px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  margin-bottom: 25px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* === DASHBOARD CARD === */
+.card-counter {
+  padding: 20px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-counter:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.card-counter h6 {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-counter span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0b2c54;
+}
+
+/* === MAP DAN TABLE === */
+#map {
+  height: 520px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+select {
+  padding: 8px;
+  margin: 5px 10px 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+table {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+}
+
+/* === RESPONSIVE DASHBOARD === */
+@media (max-width: 768px) {
+  #sidebar {
+    position: relative;
+    width: 100%;
+  }
+  #content {
+    margin-left: 0;
+  }
+}
