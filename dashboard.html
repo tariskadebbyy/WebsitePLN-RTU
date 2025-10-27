@@ -64,23 +64,44 @@
         <h5 class="mb-3">Peta KP Jawa Timur</h5>
         <div id="map" role="region" aria-label="Peta KP Jawa Timur"></div>
 
-        <h5 class="mt-4 mb-2">Data RTU</h5>
-        <table class="table table-bordered table-striped">
+        <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+            <h5 class="mb-0">Data RTU</h5>
+            <div class="d-flex">
+                <input
+                type="text"
+                id="searchInput"
+                class="form-control form-control-sm me-2"
+                placeholder="Cari data RTU..."
+                style="width: 200px;"
+                />
+                <button id="searchBtn" class="btn btn-primary btn-sm">Search</button>
+            </div>
+            </div>
+
+            <table class="table table-bordered table-striped">
             <thead class="table-primary">
                 <tr>
-                    <th>Merk RTU</th>
-                    <th>Nama KP</th>
-                    <th>Keterangan KP</th>
-                    <th>Jenis Modem</th>
-                    <th>Jenis Kartu</th>
-                    <th>Jenis Baterai</th>
+                <th>Merk RTU</th>
+                <th>Nama KP</th>
+                <th>Keterangan KP</th>
+                <th>Jenis Modem</th>
+                <th>Jenis Kartu</th>
+                <th>Jenis Baterai</th>
                 </tr>
             </thead>
             <tbody id="rtuTableBody">
                 <tr><td colspan="6" class="text-center">Memuat data...</td></tr>
             </tbody>
-        </table>
-    </div>
+            </table>
+            <!-- PAGINATION CONTROL -->
+        <!-- <div class="d-flex justify-content-between align-items-center mt-3">
+            <div id="pageInfo" class="small text-muted"></div>
+            <div>
+                <button id="prevPage" class="btn btn-outline-primary btn-sm me-2" disabled>← Prev</button>
+                <button id="nextPage" class="btn btn-outline-primary btn-sm" disabled>Next →</button>
+            </div>
+        </div> -->
+        </div>
 
     <!-- Scripts: Leaflet, Routing Machine, lalu script proyek -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -88,5 +109,19 @@
 
     <!-- Dashboard logic -->
     <script src="js/dashboard.js"></script>
+    
+    <!-- Fitur Search -->
+    <script>
+    document.getElementById("searchBtn").addEventListener("click", function () {
+    const filter = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("#rtuTableBody tr");
+
+    rows.forEach((row) => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+    });
+    });
+    </script>
+
 </body>
 </html>
