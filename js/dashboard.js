@@ -241,6 +241,7 @@ fetch(SHEET_CSV)
 function updateTable(dataList) {
   const tbody = document.getElementById("rtuTableBody");
   tbody.innerHTML = "";
+
   if (!dataList.length) {
     tbody.innerHTML =
       '<tr><td colspan="6" class="text-center">Tidak ada data ditemukan</td></tr>';
@@ -249,10 +250,24 @@ function updateTable(dataList) {
 
   dataList.forEach((d) => {
     const tr = document.createElement("tr");
+
+// Ambil nilai keterangan & ubah ke huruf kecil
+    const ketValue = (d.ket || "").toLowerCase().trim();
+
+    // Tentukan warna berdasarkan isi keterangan
+    let ketStyle = "";
+    if (ketValue.includes("integrasi") && !ketValue.includes("belum")) {
+      // jika mengandung "integrasi" tapi tidak ada kata "belum"
+      ketStyle = 'style="background-color:#28a745;color:white;font-weight:600;text-align:center"';
+    } else if (ketValue.includes("belum")) {
+      ketStyle = 'style="background-color:#ffc107;color:black;font-weight:600;text-align:center"';
+    } 
+
     tr.innerHTML = `
+    
       <td>${d.merk || "-"}</td>
       <td>${d.nama || "-"}</td>
-      <td>${d.ket || "-"}</td>
+      <td ${ketStyle}>${d.ket || "-"}</td>
       <td>${d.modem || "-"}</td>
       <td>${d.kartu || "-"}</td>
       <td>${d.bat || "-"}</td>
@@ -277,6 +292,7 @@ function updateTable(dataList) {
     tbody.appendChild(tr);
   });
 }
+
 
 // ===============================
 // FUNGSI TAMPILKAN RUTE
