@@ -288,6 +288,15 @@ table {
   margin-top: 20px;
 }
 
+.bg-success {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+.bg-warning {
+  background-color: #ffc107 !important;
+  color: black !important;
+}
+
 /* === RESPONSIVE DASHBOARD === */
 @media (max-width: 768px) {
   #sidebar {
@@ -297,4 +306,31 @@ table {
   #content {
     margin-left: 0;
   }
+}
+
+/* === PERBAIKI POSISI NOTIFIKASI NAVIGASI === */
+#navInstruction {
+  position: fixed !important;
+  bottom: 25px !important;
+  right: 25px !important;
+  top: auto !important;
+  left: auto !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: #fff !important;
+  padding: 12px 18px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;
+  z-index: 9999 !important;
+  display: none;
+  max-width: 300px;
+  word-wrap: break-word;
+  line-height: 1.4;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
